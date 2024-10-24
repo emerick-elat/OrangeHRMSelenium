@@ -19,13 +19,13 @@ namespace OrangeHRM.Test.PageObjects
         public IWebElement JobTitleField => _driver.FindElement(By.TagName("input"));
         public IWebElement JobDescriptionField => _driver.FindElement(By.TagName("textarea"));
         public IWebElement JobSPecificationFileField => _driver.FindElement(By.CssSelector("input[type=file]"));
-        public IWebElement JobNoteField => _driver.FindElement(By.TagName("textarea"));
-        public IWebElement SaveButton => _driver.FindElement(By.TagName("button"));
+        public IWebElement JobNoteField => _driver.FindElement(By.XPath("//textarea[@placeholder=\"Add note\"]"));
+        public IWebElement SaveButton => _driver.FindElement(By.CssSelector("button[type=submit]"));
 
         public void EnterJobTitle(string jobTitle)
         {
-            JobDescriptionField.Clear();
-            JobDescriptionField.SendKeys(jobTitle);
+            JobTitleField.Clear();
+            JobTitleField.SendKeys(jobTitle);
         }
 
         public void EnterJobDescription(string jobDescription)

@@ -42,15 +42,15 @@ namespace OrangeHRM.Test.Tests
             //5.Navigate to 'Admin => Job' panel
             _driver.FindElement(By.LinkText("Admin")).Click();
             Thread.Sleep(100);
-            _driver.FindElement(By.CssSelector("span.oxd-topbar-body-nav-tab-item[text()='Job']")).Click();
+            _driver.FindElement(By.XPath("//span[text()=\"Job \"]")).Click();
 
 
             //6.Click on 'Job Titles'
             _driver.FindElement(By.LinkText("Job Titles")).Click();
             
             //7.Click on 'Add' button and fill in the necessary details
-            _driver.FindElement(By.TagName("button.oxd-button")).Click();
-
+            _driver.FindElement(By.XPath("//button[text()=\" Add \"]")).Click();
+            
             _page.EnterJobTitle(JobTitle.Title);
             Assert.That(_page.JobTitleField.GetAttribute("value"), Is.EqualTo(JobTitle.Title));
 
@@ -58,7 +58,8 @@ namespace OrangeHRM.Test.Tests
             Assert.That(_page.JobDescriptionField.GetAttribute("value"), Is.EqualTo(JobTitle.Description));
 
             _page.EnterJobNote(JobTitle.Note);
-            Assert.That(_page.JobDescriptionField.GetAttribute("value"), Is.EqualTo(JobTitle.Note));
+            Assert.That(_page.JobNoteField.GetAttribute("value"), Is.EqualTo(JobTitle.Note));
+
             //8.Click on 'Save'
             _page.ClickSave();
 
