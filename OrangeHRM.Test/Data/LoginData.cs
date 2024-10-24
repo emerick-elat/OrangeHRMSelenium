@@ -1,4 +1,4 @@
-namespace OrangeHRM.Test
+namespace OrangeHRM.Test.Data
 {
     public static class LoginData
     {

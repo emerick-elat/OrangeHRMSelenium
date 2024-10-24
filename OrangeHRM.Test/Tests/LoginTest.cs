@@ -1,10 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OrangeHRM.Test.Data;
 using OrangeHRM.Test.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrangeHRM.Test.Tests
 {
@@ -18,10 +14,11 @@ namespace OrangeHRM.Test.Tests
         public void Setup()
         {
             _driver = BrowserFactory.CreateBrowser(BrowserType.Chrome);
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             _driver.Manage().Window.Maximize();
             _driver.Navigate().GoToUrl("https://opensource-demo.orangehrmlive.com/");
             _loginPage = new LoginPage(_driver);
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
         }
 
         [Test]

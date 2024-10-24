@@ -7,4 +7,8 @@ using System.Threading.Tasks;
 namespace OrangeHRM.Test
 {   
     internal enum BrowserType { Chrome, Firefox }
+    public static class App
+    {
+        public static string Url = "https://opensource-demo.orangehrmlive.com/";
+    }
 }
