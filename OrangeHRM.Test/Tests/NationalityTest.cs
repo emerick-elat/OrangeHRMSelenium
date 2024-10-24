@@ -50,8 +50,8 @@ namespace OrangeHRM.Test.Tests
             IWebElement nationality = nationalities[0];
             IList<IWebElement> options = nationality.FindElements(By.TagName("div"));
             IWebElement commandGroup = options[2];
-            IWebElement command = commandGroup.FindElement(By.TagName("div"));
-            IList<IWebElement> commands = command.FindElements(By.TagName("button"));
+            IWebElement commandNode = commandGroup.FindElement(By.TagName("div"));
+            IList<IWebElement> commands = commandNode.FindElements(By.TagName("button"));
             //IWebElement editButton = commands[1];
             //editButton.Click();
             //_driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
