@@ -37,11 +37,10 @@ namespace OrangeHRM.Test.Tests
             //3.Enter valid password
             _loginPage.SetPassword(LoginData.Password);
             //4.Click on login button;
-            _loginPage.LoginButtonClicked();
+            _loginPage.ClickLoginButton();
 
             //5.Navigate to 'Admin => Job' panel
             _driver.FindElement(By.LinkText("Admin")).Click();
-            Thread.Sleep(100);
             _driver.FindElement(By.XPath("//span[text()=\"Job \"]")).Click();
 
 

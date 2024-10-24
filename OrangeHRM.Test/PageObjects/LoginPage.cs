@@ -26,7 +26,7 @@ namespace OrangeHRM.Test.PageObjects
             PasswordField.SendKeys(password);
         }
 
-        public void LoginButtonClicked()
+        public void ClickLoginButton()
         {
             LoginButton.Click();
         }

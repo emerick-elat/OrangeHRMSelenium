@@ -16,6 +16,17 @@ namespace OrangeHRM.Test.PageObjects
             _driver = driver;
         }
 
+        public IWebElement NameField => _driver.FindElement(By.TagName("input"));
+        public IWebElement SaveButton => _driver.FindElement(By.CssSelector("button[type=submit]"));
+        public void EnterNationalityName(string name)
+        {
+            NameField.Clear();
+            NameField.SendKeys(name);
+        }
 
+        public void ClickSave()
+        {
+            SaveButton.Click();
+        }
     }
 }

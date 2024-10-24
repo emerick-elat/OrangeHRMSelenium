@@ -16,7 +16,6 @@ namespace OrangeHRM.Test.Tests
             _driver = BrowserFactory.CreateBrowser(BrowserType.Chrome);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             _driver.Manage().Window.Maximize();
-            _driver.Navigate().GoToUrl("https://opensource-demo.orangehrmlive.com/");
             _loginPage = new LoginPage(_driver);
             //Thread.Sleep(1000);
         }
@@ -24,6 +23,7 @@ namespace OrangeHRM.Test.Tests
         [Test]
         public void ValidateSuccesfullLogin()
         {
+            _driver.Navigate().GoToUrl(App.Url);
             Assert.That(_driver.Title, Is.EqualTo("OrangeHRM"));
             Assert.IsTrue(_loginPage.LoginPageDoOpen());
 
@@ -33,7 +33,7 @@ namespace OrangeHRM.Test.Tests
             _loginPage.SetPassword(LoginData.Password);
             Assert.That(_loginPage.PasswordField.GetAttribute("value"), Is.EqualTo(LoginData.Password));
 
-            _loginPage.LoginButtonClicked();
+            _loginPage.ClickLoginButton();
 
             Assert.IsTrue( _loginPage.IsLoggedIn());
         }

@@ -17,7 +17,6 @@ namespace OrangeHRM.Test.Tests
         {
             _driver = BrowserFactory.CreateBrowser(BrowserType.Chrome);
             _driver.Manage().Window.Maximize();
-            _driver.Navigate().GoToUrl(App.Url);
             _page = new AddEmployeePage(_driver);
             _loginPage = new LoginPage(_driver);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
@@ -27,11 +26,11 @@ namespace OrangeHRM.Test.Tests
         public void AddEmployee()
         {
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
-            
+            _driver.Navigate().GoToUrl(App.Url);
             // Loging to OrangeHRM
             _loginPage.SetUsername(LoginData.Username);
             _loginPage.SetPassword(LoginData.Password);
-            _loginPage.LoginButtonClicked();
+            _loginPage.ClickLoginButton();
             wait.Until(d => _loginPage.IsLoggedIn());
             Assert.IsTrue(_loginPage.IsLoggedIn());
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
