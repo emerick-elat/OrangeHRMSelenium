@@ -34,18 +34,21 @@ namespace OrangeHRM.Test.Tests
             
             //2.Enter valid username
             _loginPage.SetUsername(LoginData.Username);
+            Assert.That(_loginPage.UsernameField.GetAttribute("value"), Is.EqualTo(LoginData.Username));
             //3.Enter valid password
             _loginPage.SetPassword(LoginData.Password);
+            Assert.That(_loginPage.PasswordField.GetAttribute("value"), Is.EqualTo(LoginData.Password));
             //4.Click on login button;
             _loginPage.ClickLoginButton();
+            Assert.IsTrue(_loginPage.IsLoggedIn());
 
             //5.Navigate to 'Admin => Job' panel
             _driver.FindElement(By.LinkText("Admin")).Click();
             _driver.FindElement(By.XPath("//span[text()=\"Job \"]")).Click();
-
             //6.Click on 'Job Titles'
             _driver.FindElement(By.LinkText("Job Titles")).Click();
-            
+            Assert.That(_driver.FindElement(By.XPath("//h6[text()='Job Titles']")).Displayed, "Job Titles not showing");
+
             //7.Click on 'Add' button and fill in the necessary details
             _driver.FindElement(By.XPath("//button[text()=\" Add \"]")).Click();
             

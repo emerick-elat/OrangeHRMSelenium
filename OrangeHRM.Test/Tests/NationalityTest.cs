@@ -42,6 +42,7 @@ namespace OrangeHRM.Test.Tests
             //5.Navigate to the 'Admin => More => Nationalities' panel
             _driver.FindElement(By.LinkText("Admin")).Click();
             _driver.FindElement(By.LinkText("Nationalities")).Click();
+            Assert.That(_driver.FindElement(By.XPath("//h6[text()='Nationalities']")).Displayed, "Nationalities not showing");
             //7.Click on 'Edit' button on any nationality and change the necessary details
             
             
