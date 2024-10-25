@@ -11,6 +11,7 @@ namespace OrangeHRM.Test.Tests
         private IWebDriver _driver;
         private AddEmployeePage _page;
         private LoginPage _loginPage;
+        private WebDriverWait _wait;
 
         [SetUp]
         public void Setup()
@@ -19,6 +20,7 @@ namespace OrangeHRM.Test.Tests
             _driver.Manage().Window.Maximize();
             _page = new AddEmployeePage(_driver);
             _loginPage = new LoginPage(_driver);
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
         }
 
@@ -78,10 +80,12 @@ namespace OrangeHRM.Test.Tests
 
             //8.Click on 'Save' button
             _page.ClickSaveButton();
-
+            _wait.Until(d => _page.IsPageOpenned("empNumber"));
+            Assert.IsTrue(_page.IsPageOpenned("empNumber"), "Not redirecting to employee details");
             //9.Validate that the employee is shown in the Employee List
             _page.NavigateToEmployeeList();
-            //Assert.IsTrue(_page.IsEmployeeInResults(Employee.FirstName), "New employee not found in the Employee List.");
+            Assert.IsTrue(_page.IsEmployeeInResults(Employee.EmployeeId, $"{Employee.FirstName} {Employee.MiddleName}"), 
+                "New employee not found in the Employee List.");
         }
 
         [TearDown]

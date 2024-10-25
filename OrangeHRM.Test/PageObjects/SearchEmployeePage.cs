@@ -14,7 +14,7 @@ namespace OrangeHRM.Test.PageObjects
         }
 
         public IWebElement EmployeeNameField => _driver.FindElement(By.XPath("//input[@placeholder='Type for hints...']"));
-        public IWebElement EmployeeNumberField => _driver.FindElement(By.Name("employeeNumber"));
+        public IWebElement EmployeeNumberField => _driver.FindElement(By.CssSelector(".oxd-grid-item:nth-child(2) .oxd-input"));
         public IWebElement SearchButton => _driver.FindElement(By.XPath("//button[@type='submit']"));
 
         public void EnterEmployeeName(string name)

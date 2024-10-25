@@ -48,9 +48,10 @@ namespace OrangeHRM.Test.Tests
             _page.SearchButton.Click();
 
             //8.Enter a search parameter as '1234567'
-            //_page.EnterEmployeeNumber("1234567");
+            _page.EnterEmployeeNumber("1234567");
             //8.Click on 'Search'
-            //_page.SearchButton.Click();
+            _page.SearchButton.Click();
+            Thread.Sleep(1000);
             //9.Log out from the user profile dropdown
             _driver.FindElement(By.ClassName("oxd-userdropdown-tab")).Click();
             _driver.FindElement(By.XPath("//a[text()='Logout']")).Click();

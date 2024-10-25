@@ -1,14 +1,11 @@
 ﻿using OpenQA.Selenium;
+using OrangeHRM.Test.Data;
 
 namespace OrangeHRM.Test.PageObjects
 {
-    internal class AddEmployeePage
+    internal class AddEmployeePage : PageBase
     {
-        private readonly IWebDriver _driver;
-        public AddEmployeePage(IWebDriver webDriver)
-        {
-            _driver = webDriver;
-        }
+        public AddEmployeePage(IWebDriver webDriver) : base(webDriver) { }
 
         public IWebElement FirstNameField => _driver.FindElement(By.Name("firstName"));
         public IWebElement MiddleNameField => _driver.FindElement(By.Name("middleName"));
@@ -72,25 +69,28 @@ namespace OrangeHRM.Test.PageObjects
         {
             CancelButton.Click();
         }
-        public string GetCurrentUrl() => _driver.Url;
+        
         public bool IsOnAddEmployeePage() => GetCurrentUrl().Contains("addEmployee");
         public bool IsOnEmployeeListPage() => GetCurrentUrl().Contains("viewEmployeeList");
         public void NavigateToEmployeeList()
         {
             EmployeeListButton.Click();
         }
-        public bool IsEmployeeInResults(string username)
+        public bool IsEmployeeInResults(string EmployeeId, string name)
         {
-            NavigateToEmployeeList();
-            var rows = _driver.FindElements(By.ClassName("oxd-table-row"));
+            var rows = _driver.FindElements(By.CssSelector(".oxd-table-body .oxd-table-row"));
+            bool recordFound = false;
             foreach (var row in rows)
             {
-                if (row.Text.Contains(username))
+                var employeeId = row.FindElement(By.XPath(".//div[@role='cell'][2]")).Text;
+                var employeeName = row.FindElement(By.XPath(".//div[@role='cell'][3]")).Text;
+                if (employeeId == EmployeeId || employeeName == name)
                 {
-                    return true;
+                    recordFound = true;
+                    break;
                 }
             }
-            return false;
+            return recordFound;
         }
     }
 }
