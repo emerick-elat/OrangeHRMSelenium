@@ -13,7 +13,7 @@ namespace OrangeHRM.Test.PageObjects
         {
         }
 
-        public IWebElement JobTitleField => _driver.FindElement(By.TagName("input"));
+        public IWebElement JobTitleField => GetJobTitleField();
         public IWebElement JobDescriptionField => _driver.FindElement(By.TagName("textarea"));
         public IWebElement JobSPecificationFileField => _driver.FindElement(By.CssSelector("input[type=file]"));
         public IWebElement JobNoteField => _driver.FindElement(By.XPath("//textarea[@placeholder=\"Add note\"]"));
@@ -47,6 +47,28 @@ namespace OrangeHRM.Test.PageObjects
         public void ClickSave()
         {
             SaveButton.Click();
+        }
+
+        private IWebElement GetJobTitleField()
+        {
+            IWebElement group = _driver.FindElement(By.CssSelector(".oxd-form"));
+            return group.FindElement(By.TagName("input"));
+        }
+
+        public bool IsJobTitleInResults(string title)
+        {
+            var rows = _driver.FindElements(By.CssSelector(".oxd-table-body .oxd-table-row"));
+            bool recordFound = false;
+            foreach (var row in rows)
+            {
+                var jobTitle = row.FindElement(By.XPath(".//div[@role='cell'][2]")).Text;
+                if (jobTitle == title)
+                {
+                    recordFound = true;
+                    break;
+                }
+            }
+            return recordFound;
         }
     }
 }

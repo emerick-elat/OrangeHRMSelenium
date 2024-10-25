@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using OrangeHRM.Test.Data;
 using OrangeHRM.Test.PageObjects;
 using System;
@@ -15,6 +16,7 @@ namespace OrangeHRM.Test.Tests
         private IWebDriver _driver;
         private JobTitlePage _page;
         private LoginPage _loginPage;
+        private WebDriverWait _wait;
 
         [SetUp]
         public void Setup()
@@ -23,6 +25,7 @@ namespace OrangeHRM.Test.Tests
             _driver.Manage().Window.Maximize();
             _page = new JobTitlePage(_driver);
             _loginPage = new LoginPage(_driver);
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
         }
 
@@ -65,6 +68,9 @@ namespace OrangeHRM.Test.Tests
 
             //8.Click on 'Save'
             _page.ClickSave();
+            _wait.Until(w => _page.IsPageOpenned("viewJobTitleList"));
+            
+            Assert.IsTrue(_page.IsJobTitleInResults(JobTitle.Title), "Job title not in the results");
         }
 
         [TearDown]
