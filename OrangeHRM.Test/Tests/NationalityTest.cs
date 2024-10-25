@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using OrangeHRM.Test.Data;
 using OrangeHRM.Test.PageObjects;
 using System;
@@ -16,12 +17,14 @@ namespace OrangeHRM.Test.Tests
         private IWebDriver _driver;
         private EditNationalityPage _page;
         private LoginPage _loginPage;
+        private WebDriverWait _waitingStrategy;
 
         [SetUp]
         public void Setup()
         {
             _driver = BrowserFactory.CreateBrowser(BrowserType.Chrome);
             _driver.Manage().Window.Maximize();
+            _waitingStrategy = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             _page = new EditNationalityPage(_driver);
             _loginPage = new LoginPage(_driver);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
@@ -61,7 +64,8 @@ namespace OrangeHRM.Test.Tests
             Thread.Sleep(1000);
             //8.Click on 'Save'
             _page.ClickSave();
-            //Assert.IsTrue(_page.IsPageOpenned("admin/nationality"));
+            _waitingStrategy.Until(s => _page.IsPageOpenned("admin/nationality"));
+            Assert.IsTrue(_page.IsPageOpenned("admin/nationality"));
         }
 
         [TearDown]
