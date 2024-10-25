@@ -2,13 +2,9 @@
 
 namespace OrangeHRM.Test.PageObjects
 {
-    internal class LoginPage
+    internal class LoginPage : PageBase
     {
-        private readonly IWebDriver _driver;
-        public LoginPage(IWebDriver driver)
-        {
-            _driver = driver;
-        }
+        public LoginPage(IWebDriver driver) : base(driver) { }
 
         public IWebElement UsernameField => _driver.FindElement(By.Name("username"));
         public IWebElement PasswordField => _driver.FindElement(By.Name("password"));
@@ -29,11 +25,6 @@ namespace OrangeHRM.Test.PageObjects
         public void ClickLoginButton()
         {
             LoginButton.Click();
-        }
-
-        public string GetCurrentUrl()
-        {
-            return _driver.Url.ToString();
         }
 
         public bool LoginPageDoOpen()

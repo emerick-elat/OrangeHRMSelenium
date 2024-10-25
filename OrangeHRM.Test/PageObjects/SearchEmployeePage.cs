@@ -12,5 +12,26 @@ namespace OrangeHRM.Test.PageObjects
         public SearchEmployeePage(IWebDriver driver) : base(driver)
         {
         }
+
+        public IWebElement EmployeeNameField => _driver.FindElement(By.Name("name"));
+        public IWebElement EmployeeNumberField => _driver.FindElement(By.Name("employeeNumber"));
+        public IWebElement SearchButton => _driver.FindElement(By.XPath("//button[@type='submit']"));
+
+        public void EnterEmployeeName(string name)
+        {
+            EmployeeNameField.Clear();
+            EmployeeNameField.SendKeys(name);
+        }
+
+        public void EnterEmployeeNumber(string number)
+        {
+            EmployeeNumberField.Clear();
+            EmployeeNumberField.SendKeys(number);
+        }
+
+        public void ClickSearchButton()
+        {
+            SearchButton.Click();
+        }
     }
 }
