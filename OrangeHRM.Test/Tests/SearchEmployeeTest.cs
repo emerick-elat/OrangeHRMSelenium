@@ -46,9 +46,11 @@ namespace OrangeHRM.Test.Tests
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
             //8.Click on 'Search'
             _page.SearchButton.Click();
-
+            Assert.IsTrue(_page.CompareSearchResult("Records Found"), "Search results are not displayed");
+            
             //8.Enter a search parameter as '1234567'
-            _page.EnterEmployeeNumber("1234567");
+            _page.EnterEmployeeName("1234567");
+            Assert.IsTrue(_page.CompareSearchResult("No Records Found"), "Search results are not displayed");
             //8.Click on 'Search'
             _page.SearchButton.Click();
             Thread.Sleep(1000);

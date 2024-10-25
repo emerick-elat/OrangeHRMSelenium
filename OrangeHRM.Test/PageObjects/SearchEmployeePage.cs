@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,13 @@ namespace OrangeHRM.Test.PageObjects
         public void ClickSearchButton()
         {
             SearchButton.Click();
+        }
+
+        public bool CompareSearchResult(string searchresult)
+        {   
+            var recordsFoundElement = _driver.FindElement(By.XPath("//span[text()[contains(., 'Records Found')]]"));
+            string recordsFoundText = recordsFoundElement.Text;
+            return recordsFoundText.Contains(searchresult);
         }
     }
 }
