@@ -18,5 +18,14 @@ namespace OrangeHRM.Test.PageObjects
 
         public string GetCurrentUrl() => _driver.Url;
         public bool IsPageOpenned(string pageUrl) => GetCurrentUrl().Contains(pageUrl);
+        public bool IsRecordInElement(IWebElement rootElement, string tag)
+        {
+            IList<IWebElement> elements = rootElement.FindElements(By.TagName(tag));
+            foreach (var item in elements)
+            {
+                
+            }
+            return false;
+        }
     }
 }

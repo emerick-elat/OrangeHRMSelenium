@@ -53,7 +53,6 @@ namespace OrangeHRM.Test.Tests
             Assert.That(_driver.FindElement(By.XPath("//h6[text()='Nationalities']")).Displayed, "Nationalities not showing");
             
             //7.Click on 'Edit' button on any nationality and change the necessary details
-            //IWebElement editButton = _driver.FindElement(By.XPath("//button[contains(@class, 'bi-pencil-fill')]"));
             IWebElement editButton = _driver.FindElement(By.CssSelector(".oxd-table-cell-actions button:nth-of-type(2)"));
             editButton.Click();
             Assert.IsTrue(_page.IsPageOpenned("saveNationality"));
@@ -61,7 +60,6 @@ namespace OrangeHRM.Test.Tests
             _page.EnterNationalityName(Nationality.Name);
             //Assert.That(_page.NameField.GetAttribute("value"), Is.EqualTo(Nationality.Name));
 
-            Thread.Sleep(1000);
             //8.Click on 'Save'
             _page.ClickSave();
             _waitingStrategy.Until(s => _page.IsPageOpenned("admin/nationality"));
