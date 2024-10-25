@@ -17,6 +17,6 @@ namespace OrangeHRM.Test.PageObjects
         }
 
         public string GetCurrentUrl() => _driver.Url;
-        public bool PageDoOpen(string pageUrl) => GetCurrentUrl().Contains(pageUrl);
+        public bool IsPageOpenned(string pageUrl) => GetCurrentUrl().Contains(pageUrl);
     }
 }

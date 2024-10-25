@@ -32,35 +32,36 @@ namespace OrangeHRM.Test.Tests
         {
             //1.Launch the application
             _driver.Navigate().GoToUrl(App.Url);
+            Assert.That(_driver.Title, Is.EqualTo("OrangeHRM"));
+            Assert.IsTrue(_loginPage.LoginPageDoOpen());
             //2.Enter valid username
             _loginPage.SetUsername(LoginData.Username);
+            Assert.That(_loginPage.UsernameField.GetAttribute("value"), Is.EqualTo(LoginData.Username));
             //3.Enter valid password
             _loginPage.SetPassword(LoginData.Password);
+            Assert.That(_loginPage.PasswordField.GetAttribute("value"), Is.EqualTo(LoginData.Password));
             //4.Click on login button
             _loginPage.ClickLoginButton();
+            Assert.IsTrue(_loginPage.IsLoggedIn());
 
             //5.Navigate to the 'Admin => More => Nationalities' panel
             _driver.FindElement(By.LinkText("Admin")).Click();
             _driver.FindElement(By.LinkText("Nationalities")).Click();
             Assert.That(_driver.FindElement(By.XPath("//h6[text()='Nationalities']")).Displayed, "Nationalities not showing");
+            
             //7.Click on 'Edit' button on any nationality and change the necessary details
-            
-            
-            IWebElement element = _driver.FindElement(By.ClassName("oxd-table-body"));
-            IList<IWebElement> nationalities = element.FindElements(By.TagName("div"));
-            IWebElement nationality = nationalities[0];
-            IList<IWebElement> options = nationality.FindElements(By.TagName("div"));
-            IWebElement commandGroup = options[2];
-            IWebElement commandNode = commandGroup.FindElement(By.TagName("div"));
-            IList<IWebElement> commands = commandNode.FindElements(By.TagName("button"));
-            //IWebElement editButton = commands[1];
-            //editButton.Click();
-            //_driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            //_page.EnterNationalityName(Nationality.Name);
-            //Assert.That(Nationality.Name, Is.EqualTo(_page.NameField.GetAttribute("value")));
+            //IWebElement editButton = _driver.FindElement(By.XPath("//button[contains(@class, 'bi-pencil-fill')]"));
+            IWebElement editButton = _driver.FindElement(By.CssSelector(".oxd-table-cell-actions button:nth-of-type(2)"));
+            editButton.Click();
+            Assert.IsTrue(_page.IsPageOpenned("saveNationality"));
 
+            _page.EnterNationalityName(Nationality.Name);
+            //Assert.That(_page.NameField.GetAttribute("value"), Is.EqualTo(Nationality.Name));
+
+            Thread.Sleep(1000);
             //8.Click on 'Save'
-            //_page.ClickSave();
+            _page.ClickSave();
+            //Assert.IsTrue(_page.IsPageOpenned("admin/nationality"));
         }
 
         [TearDown]

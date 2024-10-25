@@ -31,7 +31,9 @@ namespace OrangeHRM.Test.Tests
         {
             //1.Launch the application
             _driver.Navigate().GoToUrl(App.Url);
-            
+            Assert.That(_driver.Title, Is.EqualTo("OrangeHRM"));
+            Assert.IsTrue(_loginPage.LoginPageDoOpen());
+
             //2.Enter valid username
             _loginPage.SetUsername(LoginData.Username);
             Assert.That(_loginPage.UsernameField.GetAttribute("value"), Is.EqualTo(LoginData.Username));

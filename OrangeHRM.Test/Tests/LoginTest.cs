@@ -38,7 +38,6 @@ namespace OrangeHRM.Test.Tests
 
             //4.Click on login button
             _loginPage.ClickLoginButton();
-
             Assert.IsTrue( _loginPage.IsLoggedIn());
         }
 

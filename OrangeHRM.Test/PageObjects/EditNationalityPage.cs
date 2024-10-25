@@ -11,8 +11,8 @@ namespace OrangeHRM.Test.PageObjects
     {   
         public EditNationalityPage(IWebDriver driver) : base(driver) { }
 
-        public IWebElement NameField => _driver.FindElement(By.TagName("input"));
-        public IWebElement SaveButton => _driver.FindElement(By.CssSelector("button[type=submit]"));
+        public IWebElement NameField => GetNameField();
+        public IWebElement SaveButton => _driver.FindElement(By.CssSelector("button[type='submit']"));
         public void EnterNationalityName(string name)
         {
             NameField.Clear();
@@ -22,6 +22,12 @@ namespace OrangeHRM.Test.PageObjects
         public void ClickSave()
         {
             SaveButton.Click();
+        }
+
+        private IWebElement GetNameField()
+        {
+            IWebElement group = _driver.FindElement(By.CssSelector(".oxd-input-group"));
+            return group.FindElement(By.TagName("input"));
         }
     }
 }
