@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using OrangeHRM.Test.Data;
 using OrangeHRM.Test.PageObjects;
 
@@ -10,6 +11,7 @@ namespace OrangeHRM.Test.Tests
         private IWebDriver _driver;
         private SearchEmployeePage _page;
         private LoginPage _loginPage;
+        private WebDriverWait _wait;
 
         [SetUp]
         public void Setup()
@@ -18,6 +20,7 @@ namespace OrangeHRM.Test.Tests
             _driver.Manage().Window.Maximize();
             _loginPage = new LoginPage(_driver);
             _page = new SearchEmployeePage(_driver);
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
         }
 
@@ -43,13 +46,16 @@ namespace OrangeHRM.Test.Tests
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
             //8.Click on 'Search'
             _page.SearchButton.Click();
-            
+
             //8.Enter a search parameter as '1234567'
             //_page.EnterEmployeeNumber("1234567");
             //8.Click on 'Search'
             //_page.SearchButton.Click();
             //9.Log out from the user profile dropdown
-            //_driver.FindElement(By.XPath("//a[text()='Logout']")).Click();
+            _driver.FindElement(By.ClassName("oxd-userdropdown-tab")).Click();
+            _driver.FindElement(By.XPath("//a[text()='Logout']")).Click();
+            _wait.Until(p => _loginPage.LoginPageDoOpen());
+            Assert.IsTrue(_loginPage.LoginPageDoOpen());
         }
 
         [TearDown]

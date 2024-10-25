@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using OrangeHRM.Test.Data;
 using OrangeHRM.Test.PageObjects;
 
@@ -9,6 +10,7 @@ namespace OrangeHRM.Test.Tests
     {
         private LoginPage _loginPage;
         private IWebDriver _driver;
+        private WebDriverWait _wait;
 
         [SetUp]
         public void Setup()
@@ -16,6 +18,7 @@ namespace OrangeHRM.Test.Tests
             _driver = BrowserFactory.CreateBrowser(BrowserType.Chrome);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             _driver.Manage().Window.Maximize();
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
             _loginPage = new LoginPage(_driver);
             //Thread.Sleep(1000);
         }
@@ -45,6 +48,7 @@ namespace OrangeHRM.Test.Tests
         public void TearDown()
         {
             _driver.Close();
+            
         }
     }
 }
