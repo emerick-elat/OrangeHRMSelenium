@@ -38,10 +38,18 @@ namespace OrangeHRM.Test.Tests
             //6.Click on 'Employee List'
             _driver.FindElement(By.LinkText("Employee List")).Click();
             //7.Enter a search parameter as an employee from preconditions
+            _page.EnterEmployeeName(Employee.FirstName);
+            Assert.That(_page.EmployeeNameField.GetAttribute("value"), Is.EqualTo(Employee.FirstName));
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
             //8.Click on 'Search'
+            _page.SearchButton.Click();
+            
             //8.Enter a search parameter as '1234567'
+            //_page.EnterEmployeeNumber("1234567");
             //8.Click on 'Search'
+            //_page.SearchButton.Click();
             //9.Log out from the user profile dropdown
+            //_driver.FindElement(By.XPath("//a[text()='Logout']")).Click();
         }
 
         [TearDown]

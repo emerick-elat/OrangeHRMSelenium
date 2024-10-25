@@ -13,7 +13,7 @@ namespace OrangeHRM.Test.PageObjects
         {
         }
 
-        public IWebElement EmployeeNameField => _driver.FindElement(By.Name("name"));
+        public IWebElement EmployeeNameField => _driver.FindElement(By.XPath("//input[@placeholder='Type for hints...']"));
         public IWebElement EmployeeNumberField => _driver.FindElement(By.Name("employeeNumber"));
         public IWebElement SearchButton => _driver.FindElement(By.XPath("//button[@type='submit']"));
 

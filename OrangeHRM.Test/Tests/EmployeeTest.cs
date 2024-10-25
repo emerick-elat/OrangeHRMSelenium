@@ -6,7 +6,7 @@ using OrangeHRM.Test.PageObjects;
 namespace OrangeHRM.Test.Tests
 {
     [TestFixture]
-    internal class AddEmployeeTest
+    internal class EmployeeTest
     {
         private IWebDriver _driver;
         private AddEmployeePage _page;
