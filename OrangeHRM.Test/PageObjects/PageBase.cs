@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 
 namespace OrangeHRM.Test.PageObjects
 {
-    internal class SearchEmployeePage : PageBase
+    internal class PageBase
     {
-        public SearchEmployeePage(IWebDriver driver) : base(driver)
+
+        protected readonly IWebDriver _driver;
+        public PageBase(IWebDriver driver)
         {
+            _driver = driver;
         }
+
+        public string GetCurrentUrl() => _driver.Url;
     }
 }

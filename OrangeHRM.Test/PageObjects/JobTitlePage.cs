@@ -7,20 +7,17 @@ using System.Threading.Tasks;
 
 namespace OrangeHRM.Test.PageObjects
 {
-    internal class JobTitlePage
+    internal class JobTitlePage : PageBase
     {
-        private readonly IWebDriver _driver;
-
-        public JobTitlePage(IWebDriver driver)
+        public JobTitlePage(IWebDriver driver) : base(driver)
         {
-            _driver = driver;
         }
 
         public IWebElement JobTitleField => _driver.FindElement(By.TagName("input"));
         public IWebElement JobDescriptionField => _driver.FindElement(By.TagName("textarea"));
         public IWebElement JobSPecificationFileField => _driver.FindElement(By.CssSelector("input[type=file]"));
         public IWebElement JobNoteField => _driver.FindElement(By.XPath("//textarea[@placeholder=\"Add note\"]"));
-        public IWebElement SaveButton => _driver.FindElement(By.CssSelector("button[type=submit]"));
+        public IWebElement SaveButton => _driver.FindElement(By.XPath("//button[@type='submit']"));
 
         public void EnterJobTitle(string jobTitle)
         {

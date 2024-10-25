@@ -43,7 +43,6 @@ namespace OrangeHRM.Test.Tests
             _driver.FindElement(By.LinkText("Admin")).Click();
             _driver.FindElement(By.XPath("//span[text()=\"Job \"]")).Click();
 
-
             //6.Click on 'Job Titles'
             _driver.FindElement(By.LinkText("Job Titles")).Click();
             
@@ -61,8 +60,6 @@ namespace OrangeHRM.Test.Tests
 
             //8.Click on 'Save'
             _page.ClickSave();
-
-
         }
 
         [TearDown]
