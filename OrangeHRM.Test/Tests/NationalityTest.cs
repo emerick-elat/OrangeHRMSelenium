@@ -58,12 +58,13 @@ namespace OrangeHRM.Test.Tests
             Assert.IsTrue(_page.IsPageOpenned("saveNationality"));
 
             _page.EnterNationalityName(Nationality.Name);
-            //Assert.That(_page.NameField.GetAttribute("value"), Is.EqualTo(Nationality.Name));
-
+            Assert.That(_page.NameField.GetAttribute("value"), Is.EqualTo(Nationality.Name));
+            Thread.Sleep(5000);
             //8.Click on 'Save'
             _page.ClickSave();
             _waitingStrategy.Until(s => _page.IsPageOpenned("admin/nationality"));
             Assert.IsTrue(_page.IsPageOpenned("admin/nationality"));
+            Assert.IsTrue(_page.IsRecordInResults(Nationality.Name), "Updated record not found in results");
         }
 
         [TearDown]

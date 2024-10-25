@@ -27,5 +27,19 @@ namespace OrangeHRM.Test.PageObjects
             }
             return false;
         }
+
+        public bool IsRecordInResults(string record)
+        {
+            var rows = _driver.FindElements(By.CssSelector(".oxd-table-body .oxd-table-row"));
+            foreach (var row in rows)
+            {
+                var recordDescription = row.FindElement(By.XPath(".//div[@role='cell'][2]")).Text;
+                if (recordDescription == record)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

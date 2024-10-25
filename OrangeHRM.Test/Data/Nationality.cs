@@ -8,6 +8,7 @@ namespace OrangeHRM.Test.Data
 {
     internal static class Nationality
     {
-        public static string Name = "Updated Nationality";
+        public static string Name = "Afghan";
+        public static string Description = "Updated Nationality";
     }
 }

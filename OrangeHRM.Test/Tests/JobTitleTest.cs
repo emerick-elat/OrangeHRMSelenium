@@ -25,7 +25,7 @@ namespace OrangeHRM.Test.Tests
             _driver.Manage().Window.Maximize();
             _page = new JobTitlePage(_driver);
             _loginPage = new LoginPage(_driver);
-            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
         }
 
